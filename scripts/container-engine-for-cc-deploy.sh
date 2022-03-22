@@ -39,11 +39,8 @@ function install_artifacts() {
 function uninstall_artifacts() {
 	echo "Removing containerd-for-cc artifacts from host"
 
-	rm "${container_engine_dest_file}"
-	[ ! "$(ls -A $confidential_containers_bin_dir)" ] && rmdir "${confidential_containers_bin_dir}"
-
-	rm  "${drop_in_service_file}"
-	[ ! "$(ls -A $drop_in_service_dir)" ] && rmdir "${drop_in_service_dir}"
+	rm -f /opt/confidential-containers/bin/containerd
+	rm -f /etc/systemd/system/${container_engine}.service.d/${container_engine}-for-cc-override.conf
 }
 
 function restart_systemd_service() {
