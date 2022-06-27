@@ -1,5 +1,5 @@
 ARG IMAGE
-FROM ${IMAGE:-registry.centos.org/centos}:7
+FROM ${IMAGE:-docker.io/library/centos}:7
 
 ARG ARCH
 ARG CONTAINERD_ARTIFACTS=./output/opt/containerd-engine-for-cc-artifacts/${ARCH:-x86_64}/containerd

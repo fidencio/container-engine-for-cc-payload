@@ -20,7 +20,7 @@ supported_arches=(
 function setup_env_for_arch() {
 	case "$1" in
 		"linux/amd64") 
-			image="registry.centos.org/centos"
+			image="docker.io/library/centos"
 			kernel_arch="x86_64"
 			;;
 		"linux/s390x")
