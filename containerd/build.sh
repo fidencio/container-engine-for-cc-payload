@@ -12,7 +12,7 @@ containerd_dir="$(mktemp -d -t containerd-XXXXXXXXXX)/containerd"
 
 supported_arches=(
 	"linux/amd64"
-	"linux/s390x"
+#	"linux/s390x"
 )
 
 function clone_repo() {
