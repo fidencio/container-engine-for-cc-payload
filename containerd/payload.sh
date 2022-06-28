@@ -46,6 +46,7 @@ function build_containerd_payload() {
 			-f "containerd/payload_Dockerfile" \
 			-t "${registry}:${kernel_arch}-${tag}" \
 			--platform="${arch}" \
+			--load \
 			.
 		docker push "${registry}:${kernel_arch}-${tag}"
 	done
