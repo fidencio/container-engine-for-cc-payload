@@ -7,7 +7,7 @@ set -o nounset
 script_dir=$(dirname "$(readlink -f "$0")")
 
 containerd_repo=${containerd_repo:-"https://github.com/confidential-containers/containerd"}
-containerd_version=${containerd_version:-"v1.6.1.0"}
+containerd_version=${containerd_version:-"v1.6.6.0"}
 containerd_dir="$(mktemp -d -t containerd-XXXXXXXXXX)/containerd"
 
 supported_arches=(

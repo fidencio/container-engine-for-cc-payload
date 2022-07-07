@@ -1,4 +1,4 @@
-CONTAINERD_VERSION=v1.6.1.0
+CONTAINERD_VERSION=v1.6.6.0
 
 SYSTEMD_DROP_IN_CONFIG = configs/container-engine-for-cc-override.conf.in
 
