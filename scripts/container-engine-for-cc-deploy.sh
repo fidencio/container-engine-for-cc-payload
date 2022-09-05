@@ -41,6 +41,8 @@ function uninstall_artifacts() {
 
 	rm -f /opt/confidential-containers/bin/containerd
 	rm -f /etc/systemd/system/${container_engine}.service.d/${container_engine}-for-cc-override.conf
+
+	rmdir /opt/confidential-containers
 }
 
 function restart_systemd_service() {
