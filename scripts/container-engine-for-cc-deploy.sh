@@ -39,15 +39,26 @@ function install_artifacts() {
 function uninstall_artifacts() {
 	echo "Removing containerd-for-cc artifacts from host"
 
-	rm -f /opt/confidential-containers/bin/containerd
+	echo "Removing the systemd drop-in file"
 	rm -f /etc/systemd/system/${container_engine}.service.d/${container_engine}-for-cc-override.conf
+	echo "Removing the systemd drop-in file's directory, if empty"
+	[ -d /etc/systemd/system/${container_engine}.service.d ] && rmdir --ignore-fail-on-non-empty /etc/systemd/system/${container_engine}.service.d
+	
+	restart_systemd_service
 
-	rmdir /opt/confidential-containers
+	echo "Removing the containerd binary"
+	rm -f /opt/confidential-containers/bin/containerd
+	echo "Removing the /opt/confidential-containers directory"
+	[ -d /opt/confidential-containers/bin ] && rmdir --ignore-fail-on-non-empty -p /opt/confidential-containers/bin
+	[ -d /opt/confidential-containers ] && rmdir --ignore-fail-on-non-empty -p /opt/confidential-containers
 }
 
 function restart_systemd_service() {
 	systemctl daemon-reload
+	echo "Restarting ${container_engine}"
 	systemctl restart "${container_engine}"
+	echo "Restarting kubelet"
+	systemctl restart kubelet
 }
 
 label_node() {
@@ -84,6 +95,7 @@ function main() {
 	case "${action}" in
 	install)
 		install_artifacts
+		restart_systemd_service
 		;;
 	uninstall)
 		uninstall_artifacts
@@ -93,7 +105,6 @@ function main() {
 		;;
 	esac
 
-	restart_systemd_service
 	label_node "${action}"
 
 
