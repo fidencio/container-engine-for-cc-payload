@@ -35,7 +35,7 @@ function setup_env_for_arch() {
 function build_containerd_payload() {
 	pushd "${script_dir}/.."
 
-	tag=$(date +%Y%m%d%H%M%s)
+	tag=$(git rev-parse HEAD)
 
 	for arch in ${supported_arches[@]}; do
 		setup_env_for_arch "${arch}"
