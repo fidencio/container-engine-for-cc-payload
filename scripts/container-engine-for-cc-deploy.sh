@@ -57,8 +57,6 @@ function restart_systemd_service() {
 	systemctl daemon-reload
 	echo "Restarting ${container_engine}"
 	systemctl restart "${container_engine}"
-	echo "Restarting kubelet"
-	systemctl restart kubelet
 }
 
 label_node() {
