@@ -30,10 +30,8 @@ function install_artifacts() {
 
 	local artifacts_dir="/opt/confidential-containers-pre-install-artifacts"
 
-	cp -a ${artifacts_dir}/opt/confidential-containers/* /opt/confidential-containers/
-	chmod +x /opt/confidential-containers/bin/containerd
-
-	cp -a ${artifacts_dir}/etc/systemd/system/* /etc/systemd/system/
+	install -D -m 755 ${artifacts_dir}/opt/confidential-containers/bin/containerd /opt/confidential-containers/bin/containerd
+	install -D -m 644 ${artifacts_dir}/etc/systemd/system/containerd.service.d/containerd-for-cc-override.conf /etc/systemd/system/containerd.service.d/containerd-for-cc-override.conf
 }
 
 function uninstall_artifacts() {
